@@ -57,7 +57,7 @@ if __name__ == '__main__':
             all_order.add_order(o)
 
         # Creating all the drones
-        all_drone = AllDrone()
+        all_drone = AllDrone(max_time)
         drone_x_coor = all_warehouse[0].x_coor
         drone_y_coor = all_warehouse[0].y_coor
 

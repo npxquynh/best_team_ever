@@ -18,7 +18,7 @@ class Simulation():
 
         self.all_order = AllOrder()
         self.all_warehouse = AllWarehouse()
-        self.all_drone = AllDrone()
+        self.all_drone = AllDrone(max_time)
 
     def run(self):
         # 1 drone for all orders

@@ -29,7 +29,8 @@ class Drone():
         return output
 
 class AllDrone():
-    def __init__(self):
+    def __init__(self, max_time):
+        self.max_time = max_time
         self.drones = list()
 
     def add_drone(self, drone):
@@ -37,7 +38,12 @@ class AllDrone():
 
     def get_drone(self):
         # Simplest case, always return drone 0
-        return self.drones[0]
+        for drone in self.drones:
+            if drone.current_time < self.max_time:
+                return drone
+
+        print "WARNING: no available drone existed\n"
+        return None
 
     def no_total_command(self):
         s = 0

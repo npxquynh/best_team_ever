@@ -25,7 +25,10 @@ class Warehouse():
         Otherwise, returns -1
         """
         if pid in self.products_map:
-            return self.products_map[pid]
+            if self.products_map[pid] > 0:
+                return self.products_map[pid]
+            else:
+                return -1
         else:
             return -1
 
@@ -66,6 +69,9 @@ class AllWarehouse():
         for w in self.warehouses:
             if (w.find_product(pid) != -1):
                 wids.append(w.id)
+
+        print "Finding product = %s" % pid
+        print wids
 
         return wids
 
