@@ -1,6 +1,6 @@
 from simulation import *
 from warehouse import *
-
+from utility import *
 
 input_filepath = './busy_day.in'
 
@@ -36,10 +36,10 @@ if __name__ == '__main__':
             products = f.readline().strip().split(' ');
             products = [int(p) for p in products]
 
-            w = Warehouse(x_coor, y_coor, products)
+            w = Warehouse(x_coor, y_coor, i, products)
             all_warehouse.add_warehouse(w)
 
-        # Processing the order
+        # Processing the orders
         all_order = AllOrder()
         no_orders = int(f.readline().strip())
 
@@ -53,13 +53,16 @@ if __name__ == '__main__':
             items = f.readline().strip().split(' ');
             items = [int(p) for p in products]
 
-            o = Order(x_coor, y_coor, no_items, items)
+            o = Order(x_coor, y_coor, i, no_items, items)
             all_order.add_order(o)
 
+        # Creating all the drones
         sim.all_order = all_order
         sim.all_warehouse = all_warehouse
 
         print sim
+
+        print cal_distance(2, 1, 5, 3)
 
 
 
