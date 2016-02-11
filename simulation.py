@@ -22,35 +22,40 @@ class Simulation():
 
     def run(self):
         # 1 drone for all orders
+        for i in range(1):
+            order = self.all_order.get_next_order()
+            self.run_for_order(order)
+
+
+    def run_for_order(self, order):
         drone = self.all_drone.get_drone()
-        order = self.all_order.get_next_order()
-
-        print order
-
-        # Load item
         for item in order.items:
             wh = self._find_item_in_warehouse(item)
-            wh.remove_product(item)
-            command = ('L', wh.id, item, 1) # now we only work on 1 item at a time
-            new_x = wh.x_coor
-            new_y = wh.y_coor
-            command_time = cal_distance(drone.x_coor, drone.y_coor, new_x, new_y)
-            drone.update_coor(new_x, new_y)
-            drone.add_command(command, command_time)
+            if wh:
+                # Load item
+                wh.remove_product(item)
+                command = ('L', wh.id, item, 1) # now we only work on 1 item at a time
+                new_x = wh.x_coor
+                new_y = wh.y_coor
+                command_time = cal_distance(drone.x_coor, drone.y_coor, new_x, new_y)
+                drone.update_coor(new_x, new_y)
+                drone.add_command(command, command_time)
 
-        # Unload item
-        for (item, quantity) in order.items_map.iteritems():
-            command = ('D', order.id, item, quantity)
-            new_x = order.x_coor
-            new_y = order.y_coor
-            command_time = cal_distance(drone.x_coor, drone.y_coor, new_x, new_y)
-            drone.update_coor(new_x, new_y)
-            drone.add_command(command, command_time)
+                # Unload
+                command = ('D', order.id, item, 1)
+                new_x = order.x_coor
+                new_y = order.y_coor
+                command_time = cal_distance(drone.x_coor, drone.y_coor, new_x, new_y)
+                drone.update_coor(new_x, new_y)
+                drone.add_command(command, command_time)
+            else:
+                print "WARNING no warehouse for item %s" % item
 
     def _find_item_in_warehouse(self, item):
         """Returns the first warehouse
         """
         ids = self.all_warehouse.find_product(item)
+        print "Warehouse list for item %i: %s" % (item, ids)
         if ids:
             return self.all_warehouse[ids[0]]
         else:

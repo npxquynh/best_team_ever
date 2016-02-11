@@ -44,8 +44,7 @@ if __name__ == '__main__':
         no_orders = int(f.readline().strip())
         print "Num of orders %s" % no_orders
 
-        for i in range(3):
-        # for i in range(no_orders):
+        for i in range(no_orders):
             coordinates = [int(c) for c in f.readline().strip().split(' ')]
             x_coor = coordinates[0]
             y_coor = coordinates[1]
@@ -72,6 +71,7 @@ if __name__ == '__main__':
         sim.all_drone = all_drone
 
         print sim
+        sim.all_warehouse.find_product(258)
         sim.run()
         sim.write("busy_day.out")
 

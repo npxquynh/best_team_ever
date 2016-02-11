@@ -14,21 +14,18 @@ class Warehouse():
         self.preprocess()
 
     def preprocess(self):
-        for p in self.products:
-            if p in self.products_map:
-                self.products_map[p] += 1
-            else:
-                self.products_map[p] = 1
+        for (index, p) in enumerate(self.products):
+            self.products_map[index] = p
+            if (index == 258):
+                print self.products_map[index]
 
     def find_product(self, pid):
         """Returns the remaining quantity
         Otherwise, returns -1
         """
-        if pid in self.products_map:
-            if self.products_map[pid] > 0:
-                return self.products_map[pid]
-            else:
-                return -1
+        # print self.products_map[258]
+        if self.products_map[pid] != 0:
+            return 1
         else:
             return -1
 
@@ -36,7 +33,7 @@ class Warehouse():
         if pid in self.products_map:
             if self.products_map[pid] > 1:
                 self.products_map[pid] -= 1
-            if self.products_map[pid] == 1:
+            elif self.products_map[pid] == 1:
                 self.products_map.pop(pid)
             else:
                 print "ERROR remove_product for warehouse %i, pid = %i" % (self.id, pid)
@@ -67,11 +64,12 @@ class AllWarehouse():
         wids = list()
 
         for w in self.warehouses:
+            if (pid == 258):
+                print "258 %s" % w.find_product(pid)
             if (w.find_product(pid) != -1):
                 wids.append(w.id)
 
-        # print "Finding product = %s" % pid
-        # print wids
+        print wids
 
         return wids
 
