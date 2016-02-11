@@ -42,8 +42,10 @@ if __name__ == '__main__':
         # Processing the orders
         all_order = AllOrder()
         no_orders = int(f.readline().strip())
+        print "Num of orders %s" % no_orders
 
-        for i in range(no_orders):
+        for i in range(3):
+        # for i in range(no_orders):
             coordinates = [int(c) for c in f.readline().strip().split(' ')]
             x_coor = coordinates[0]
             y_coor = coordinates[1]
@@ -51,7 +53,7 @@ if __name__ == '__main__':
             no_items = int(f.readline().strip());
 
             items = f.readline().strip().split(' ');
-            items = [int(p) for p in products]
+            items = [int(p) for p in items]
 
             o = Order(x_coor, y_coor, i, no_items, items)
             all_order.add_order(o)

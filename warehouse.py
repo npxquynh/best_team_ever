@@ -70,8 +70,8 @@ class AllWarehouse():
             if (w.find_product(pid) != -1):
                 wids.append(w.id)
 
-        print "Finding product = %s" % pid
-        print wids
+        # print "Finding product = %s" % pid
+        # print wids
 
         return wids
 

@@ -16,6 +16,10 @@ class Order():
             else:
                 self.items_map[item] = 0
 
+    def __repr__(self):
+        outstr = "%s\n" % self.items
+        return outstr
+
 
 class AllOrder():
     def __init__(self):

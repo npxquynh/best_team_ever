@@ -25,6 +25,8 @@ class Simulation():
         drone = self.all_drone.get_drone()
         order = self.all_order.get_next_order()
 
+        print order
+
         # Load item
         for item in order.items:
             wh = self._find_item_in_warehouse(item)
@@ -64,7 +66,6 @@ class Simulation():
     def __repr__(self):
         output = ""
         output = output + "### Simulation ###\n"
-        output += str(self.no_cols) + "\n"
         output += str(self.no_drones) + "\n"
 
         return output
