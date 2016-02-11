@@ -57,10 +57,21 @@ if __name__ == '__main__':
             all_order.add_order(o)
 
         # Creating all the drones
+        all_drone = AllDrone()
+        drone_x_coor = all_warehouse[0].x_coor
+        drone_y_coor = all_warehouse[0].y_coor
+
+        for i in range(no_drones):
+            d = Drone(drone_x_coor, drone_y_coor, i, max_load)
+            all_drone.add_drone(d)
+
         sim.all_order = all_order
         sim.all_warehouse = all_warehouse
+        sim.all_drone = all_drone
 
         print sim
+        sim.run()
+        sim.write("busy_day.out")
 
         print cal_distance(2, 1, 5, 3)
 

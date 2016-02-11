@@ -6,6 +6,17 @@ class Order():
         self.no_items = no_items
         self.items = items
 
+        self.preprocess()
+
+    def preprocess(self):
+        self.items_map = dict()
+        for item in self.items:
+            if item in self.items_map:
+                self.items_map[item] += 1
+            else:
+                self.items_map[item] = 0
+
+
 class AllOrder():
     def __init__(self):
         self.orders = list()

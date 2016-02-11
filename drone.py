@@ -15,6 +15,18 @@ class Drone():
         self.commands_time.append(command_time)
         self.current_time += command_time
 
+    def update_coor(self, x_coor, y_coor):
+        self.x_coor = x_coor
+        self.y_coor = y_coor
+
+    def get_all_commands(self):
+        """Returns the string to write to file
+        """
+        output = ""
+        for com in self.commands:
+            output = output + "%s %s\n" % (self.id, " ".join([str(s) for s in com]))
+
+        return output
 
 class AllDrone():
     def __init__(self):
@@ -26,3 +38,12 @@ class AllDrone():
     def get_drone(self):
         # Simplest case, always return drone 0
         return self.drones[0]
+
+    def no_total_command(self):
+        s = 0
+        for drone in self.drones:
+            s += len(drone.commands)
+        return s
+
+    def __getitem__(self, i):
+        return self.drones[i]
